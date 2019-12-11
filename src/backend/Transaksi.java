@@ -9,8 +9,8 @@ import java.sql.*;
 public class Transaksi implements crud{
     private int idTansaksi;
     private Tamu tamu = new Tamu();
-    private Pemabayaran bayar = new Pemabayaran();
-    private Kamar kamar = new Kamar();
+    private Pembayaran bayar;
+    private Kamar kamar = new KamarKosong();
     private int lamaInap;
     private int total;
     private int status;
@@ -31,11 +31,11 @@ public class Transaksi implements crud{
         this.tamu = tamu;
     }
 
-    public Pemabayaran getBayar() {
+    public Pembayaran getBayar() {
         return bayar;
     }
 
-    public void setBayar(Pemabayaran bayar) {
+    public void setBayar(Pembayaran bayar) {
         this.bayar = bayar;
     }
 
@@ -81,52 +81,52 @@ public class Transaksi implements crud{
     
      public Transaksi getById(int id){
         Transaksi transaksi = new Transaksi();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM tamu WHERE id_transaksi = '"+id+"'");
+        ResultSet rs = BDHelper.selectQuery("SELECT * FROM transaksi WHERE id_transaksi = '"+id+"'");
         
         try {
             while (rs.next()) {
                transaksi = new Transaksi();
                transaksi.setIdTansaksi(rs.getInt("id_transaksi"));
                transaksi.setTamu(transaksi.tamu.getById(Integer.parseInt("id_tamu")));
-               transaksi.setKamar(transaksi.kamar.getByid(Integer.parseInt("id_kamar")));
-               transaksi.setBayar(transaksi.bayar.getByid(Integer.parseInt("id_pembayaran")));
-               transaksi.setKamar("lama_inap");
+               transaksi.setKamar(transaksi.kamar.getById(Integer.parseInt("id_kamar")));
+               transaksi.setBayar(transaksi.bayar.getById(Integer.parseInt("id_pembayaran")));
+               transaksi.setLamaInap(rs.getInt("lama_inap"));
                transaksi.setTotal(Integer.parseInt("total_biaya"));
                transaksi.setStatus(Integer.parseInt("status"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return tamu;
+        return transaksi;
     }
      
      public ArrayList<Transaksi> getAll(){
-        ArrayList<Transaksi>ListBuku = new ArrayList();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM peminjaman");
+        ArrayList<Transaksi>listTransaksi = new ArrayList();
+        ResultSet rs = BDHelper.selectQuery("SELECT * FROM transaksi");
         try {
             while (rs.next()) {     
                Transaksi transaksi = new Transaksi();
                transaksi.setIdTansaksi(rs.getInt("id_transaksi"));
                transaksi.setTamu(transaksi.tamu.getById(Integer.parseInt("id_tamu")));
-               transaksi.setKamar(transaksi.kamar.getByid(Integer.parseInt("id_kamar")));
-               transaksi.setBayar(transaksi.bayar.getByid(Integer.parseInt("id_pembayaran")));
-               transaksi.setKamar("lama_inap");
+               transaksi.setKamar(transaksi.kamar.getById(Integer.parseInt("id_kamar")));
+               transaksi.setBayar(transaksi.bayar.getById(Integer.parseInt("id_pembayaran")));
+               transaksi.setLamaInap(rs.getInt("lama_inap"));
                transaksi.setTotal(Integer.parseInt("total_biaya"));
                transaksi.setStatus(Integer.parseInt("status"));
-               ListBuku.add(transaksi);
+               listTransaksi.add(transaksi);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return ListBuku;
+        return listTransaksi;
     }
      
     @Override
      public void save(){
             String SQL = "UPDATE transaksi SET "
                     +"      id_tamu = '"+this.tamu.getIdTamu()+ "', "
-                    +"      id_pembayaran = '"+this.bayar.getIdBayar()+ "', "
-                    +"      id_kamar = '"+this.kamar.getIdKamar + "', "
+                    +"      id_pembayaran = '"+this.bayar.getId_pembayran()+ "', "
+                    +"      id_kamar = '"+this.kamar.getIdkamar() + "', "
                     +"      lama_inap = '"+this.lamaInap + "' "
                     +"      status = '"+this.status + "' "
                     +"      WHERE id_transaksi = '"+this.idTansaksi + "'";

@@ -24,7 +24,7 @@ public class FrmKamar extends javax.swing.JFrame {
 
     public void tampilkanData() {
         String[] kolom = {"id_kamar", "Jenis Kamar", "Harga Kamar", "Jumlah Kamar", "Fasilitas"};
-        ArrayList<Kamar> list = new Kamar().getAll();
+        ArrayList<Kamar> list = new SemuaKamar().getAll();
         Object rowData[] = new Object[5];
 
         tblKamar.setModel(new DefaultTableModel(new Object[][]{}, kolom));
@@ -217,7 +217,7 @@ public class FrmKamar extends javax.swing.JFrame {
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         // TODO add your handling code here:
-        Kamar kmr = new Kamar();
+        Kamar kmr = new SemuaKamar();
         kmr.setIdkamar(Integer.parseInt(txtIdkamar.getText()));
         kmr.setHargaKamar(Integer.parseInt(txtHrgKmr.getText()));
         kmr.setFasilitas(txtFasilitas.getText());
@@ -234,7 +234,7 @@ public class FrmKamar extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel)tblKamar.getModel();
         int row =tblKamar.getSelectedRow();
         
-        Kamar kmr = new Kamar().getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
+        Kamar kmr = new KamarKosong().getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
         kmr.delete();
         kosongkanForm();
         tampilkanData();

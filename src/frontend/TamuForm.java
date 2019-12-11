@@ -106,6 +106,11 @@ public class TamuForm extends javax.swing.JFrame {
         });
 
         jButton2.setText("pemesanan");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("id :");
 
@@ -293,6 +298,14 @@ public class TamuForm extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         kosngkanForm();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Tamu tamu = new Tamu().getById(Integer.parseInt(txtId.getText()));
+        ProsesPemesanan.setTamu(tamu);
+        PemesananForm pmsForm = new PemesananForm();
+        pmsForm.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

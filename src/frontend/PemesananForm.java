@@ -42,6 +42,23 @@ public class PemesananForm extends javax.swing.JFrame {
         }
     }
     
+    public void cari(int id){
+        String[] kolom = {"id_kamar", "Jenis Kamar", "Harga Kamar", "Jumlah Kamar", "Fasilitas"};
+        Kamar list = new KamarKosong().getById(id);
+        Object rowData[] = new Object[5];
+
+        tabel.setModel(new DefaultTableModel(new Object[][]{}, kolom));
+        
+            rowData[0] = list.getIdkamar();
+            rowData[1] = list.getJenisKamar();
+            rowData[2] = list.getHargaKamar();
+            rowData[3] = list.getJumlahKamar();
+            rowData[4] = list.getFasilitas();
+
+            ((DefaultTableModel) tabel.getModel()).addRow(rowData);
+        
+    }
+    
     public void hitung(){
         float total = Float.valueOf(txtLama.getText())*harga;
         txtTotal.setText(String.valueOf(total));
@@ -135,7 +152,7 @@ public class PemesananForm extends javax.swing.JFrame {
                             .addComponent(txtTotal)
                             .addComponent(txtKamar)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                        .addGap(254, 254, 254)
+                        .addGap(0, 254, Short.MAX_VALUE)
                         .addComponent(BtPembayaran)))
                 .addContainerGap())
         );

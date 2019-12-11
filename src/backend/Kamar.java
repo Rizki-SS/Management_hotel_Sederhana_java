@@ -3,7 +3,7 @@ package backend;
 import java.util.ArrayList;
 import java.sql.*;
 
-public class Kamar implements crud{
+public abstract class Kamar implements crud{
 
     private int id_kamar;
     private String jenis_kamar;
@@ -63,64 +63,10 @@ public class Kamar implements crud{
         this.fasilitas = fasilitas;
     }
 
-    public Kamar getById(int id) {
-        Kamar kmr = new Kamar();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar WHERE id_kamar = '" + id + "'");
+    public abstract Kamar getById(int id);
+    public abstract ArrayList<Kamar> getAll();
 
-        try {
-            while (rs.next()) {
-                kmr = new Kamar();
-                kmr.setFasilitas(rs.getString("fasilitas"));
-                kmr.setIdkamar(rs.getInt("id_kamar"));
-                kmr.setHargaKamar(rs.getInt("harga"));
-                kmr.setJenisKamar(rs.getString("jenis_kamar"));
-                kmr.setJumlahKamar(rs.getInt("jumlah"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return kmr;
-    }
-
-    public ArrayList<Kamar> getAll() {
-        ArrayList<Kamar> ListKamar = new ArrayList();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar");
-        try {
-            while (rs.next()) {
-                Kamar kmr = new Kamar();
-                kmr.setFasilitas(rs.getString("fasilitas"));
-                kmr.setIdkamar(rs.getInt("id_kamar"));
-                kmr.setHargaKamar(rs.getInt("harga"));
-                kmr.setJenisKamar(rs.getString("jenis_kamar"));
-                kmr.setJumlahKamar(rs.getInt("jumlah"));
-                ListKamar.add(kmr);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ListKamar;
-    }
-
-    public ArrayList<Kamar> search(String keyword) {
-        ArrayList<Kamar> ListKamar = new ArrayList();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar");
-        try {
-            while (rs.next()) {
-                Kamar kmr = new Kamar();
-                kmr.setFasilitas(rs.getString("fasilitas"));
-                kmr.setIdkamar(rs.getInt("id_kamar"));
-                kmr.setHargaKamar(rs.getInt("harga"));
-                kmr.setJenisKamar(rs.getString("jenis_kamar"));
-                kmr.setJumlahKamar(rs.getInt("jumlah"));
-                ListKamar.add(kmr);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ListKamar;
-    }
-
+    @Override
     public void save() {
         if (id_kamar == 0) {
 
@@ -141,6 +87,7 @@ public class Kamar implements crud{
         }
     }
 
+    @Override
     public void delete() {
         String SQL = "DELETE FROM kamar WHERE id_kamar = '" + this.id_kamar + "'";
         BDHelper.executeQuery(SQL);

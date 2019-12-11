@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/frontend/TamuForm.java</file>
+            <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/backend/Pembayaran.java</file>
+            <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/backend/Tunai.java</file>
             <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/backend/Tamu.java</file>
-            <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/frontend/Pemesanan.java</file>
-            <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/frontend/Transaksi.java</file>
             <file>file:/home/rizki/Documents/Kuliah/PBO/Jobsheet9/Hotel/src/backend/Transaksi.java</file>
         </group>
     </open-files>

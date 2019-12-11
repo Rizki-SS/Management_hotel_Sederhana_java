@@ -5,42 +5,18 @@
  */
 package backend;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.sql.*;
 
 /**
  *
  * @author rizki
  */
-public class KamarKosong extends Kamar{
-    @Override
-    public ArrayList<Kamar> getAll() {
-        ArrayList<Kamar> ListKamar = new ArrayList();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar LEFT JOIN (SELECT id_kamar as id, COUNT(id_kamar) as jumlah_disewa FROM transaksi WHERE status = 0 GROUP BY id_kamar) as a ON id=id_kamar");
-        try {
-            while (rs.next()) {
-                Kamar kmr = new KamarKosong();
-                kmr.setFasilitas(rs.getString("fasilitas"));
-                kmr.setIdkamar(rs.getInt("id_kamar"));
-                kmr.setHargaKamar(rs.getInt("harga"));
-                kmr.setJenisKamar(rs.getString("jenis_kamar"));
-                if (rs.getString("jumlah_disewa") == "Null") {
-                    kmr.setJumlahKamar(rs.getInt("jumlah"));
-                }else{
-                    kmr.setJumlahKamar(rs.getInt("jumlah")-rs.getInt("jumlah_disewa"));
-                }
-                ListKamar.add(kmr);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return ListKamar;
-    }
-
+public class SemuaKamar extends Kamar{
     @Override
     public Kamar getById(int id) {
         Kamar kmr = new SemuaKamar();
-        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar LEFT JOIN (SELECT id_kamar as id, COUNT(id_kamar) as jumlah_disewa FROM transaksi WHERE status = 0 GROUP BY id_kamar) as a ON id=id_kamar WHERE id_kamar = '" + id + "'");
+        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar WHERE id_kamar = '" + id + "'");
 
         try {
             while (rs.next()) {
@@ -55,5 +31,25 @@ public class KamarKosong extends Kamar{
             e.printStackTrace();
         }
         return kmr;
+    }
+    
+    @Override
+     public ArrayList<Kamar> getAll() {
+        ArrayList<Kamar> ListKamar = new ArrayList();
+        ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar");
+        try {
+            while (rs.next()) {
+                Kamar kmr = new SemuaKamar();
+                kmr.setFasilitas(rs.getString("fasilitas"));
+                kmr.setIdkamar(rs.getInt("id_kamar"));
+                kmr.setHargaKamar(rs.getInt("harga"));
+                kmr.setJenisKamar(rs.getString("jenis_kamar"));
+                kmr.setJumlahKamar(rs.getInt("jumlah"));
+                ListKamar.add(kmr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ListKamar;
     }
 }
