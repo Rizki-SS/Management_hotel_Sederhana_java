@@ -39,7 +39,7 @@ public class KamarKosong extends Kamar{
 
     @Override
     public Kamar getById(int id) {
-        Kamar kmr = new SemuaKamar();
+        Kamar kmr = new KamarKosong();
         ResultSet rs = BDHelper.selectQuery("SELECT * FROM kamar LEFT JOIN (SELECT id_kamar as id, COUNT(id_kamar) as jumlah_disewa FROM transaksi WHERE status = 0 GROUP BY id_kamar) as a ON id=id_kamar WHERE id_kamar = '" + id + "'");
 
         try {

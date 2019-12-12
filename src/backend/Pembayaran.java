@@ -7,11 +7,8 @@ public class Pembayaran implements crud{
 
     private int id_pembayran;
     private String nama;
+    private String no_id;
     private String date;
-
-    public Pembayaran(String nama) {
-        this.nama = nama;
-    }
 
     public Pembayaran() {
     }
@@ -40,6 +37,21 @@ public class Pembayaran implements crud{
         this.date = date;
     }
 
+    public void setNo_id(String no_id) {
+        this.no_id = no_id;
+    }
+
+    public String getNo_id() {
+        return no_id;
+    }
+
+    public Pembayaran(String nama, String no_id) {
+        this.nama = nama;
+        this.no_id = no_id;
+    }
+    
+    
+    
     public Pembayaran getById(int id) {
         Pembayaran pem = new Pembayaran();
         ResultSet rs = BDHelper.selectQuery("SELECT * FROM pembayaran WHERE id_pembayaran = '" + id + "'");
@@ -47,9 +59,10 @@ public class Pembayaran implements crud{
         try {
             while (rs.next()) {
                 pem = new Pembayaran();
-                pem.setId_pembayran(rs.getInt("id_pembayaraan"));
+                pem.setId_pembayran(rs.getInt("id_pembayaran"));
                 pem.setNama(rs.getString("nama"));
-                pem.setNama(rs.getString("nama"));
+                pem.setNo_id("no_identitas");
+                pem.setDate("tanggal_pembayran");
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,9 +86,10 @@ public class Pembayaran implements crud{
 
     @Override
     public void save() {
-        String SQL = "INSERT INTO pembayaran (nama,tanggal_pembayran, Jenis) VALUES("
+        String SQL = "INSERT INTO pembayaran (nama,no_identitas,tanggal_pembayran, Jenis) VALUES("
                     + "     '" + getNama() + "', "
-                    + "     '" + getDate() + "',"
+                    + "     '" + getNo_id()+ "',"
+                    + "     NOW(),"
                     + "     ' Tunai ' )";
             this.id_pembayran = BDHelper.insertQueryGetId(SQL);
     }

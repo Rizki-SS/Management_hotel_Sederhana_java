@@ -10,18 +10,8 @@ package backend;
  * @author rizki
  */
 public class ProsesPemesanan {
-    private static Tamu tamu;
     private static Pembayaran pembayaran;
-    private static Kamar kamar;
-    private static Transaksi transaksi;
-
-    public static Tamu getTamu() {
-        return tamu;
-    }
-
-    public static void setTamu(Tamu tamu) {
-        ProsesPemesanan.tamu = tamu;
-    }
+    private static Transaksi transaksi = new Transaksi();
 
     public static Pembayaran getPembayaran() {
         return pembayaran;
@@ -31,14 +21,6 @@ public class ProsesPemesanan {
         ProsesPemesanan.pembayaran = pembayaran;
     }
 
-    public static Kamar getKamar() {
-        return kamar;
-    }
-
-    public static void setKamar(Kamar kamar) {
-        ProsesPemesanan.kamar = kamar;
-    }
-
     public static Transaksi getTransaksi() {
         return transaksi;
     }
@@ -46,4 +28,12 @@ public class ProsesPemesanan {
     public static void setTransaksi(Transaksi transaksi) {
         ProsesPemesanan.transaksi = transaksi;
     }
+
+    public static void save() {
+        pembayaran.save();
+        transaksi.setBayar(pembayaran);
+        transaksi.save();
+    }
+
+    
 }

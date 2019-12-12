@@ -14,10 +14,18 @@ public class Card extends Pembayaran{
     public void save() {
         int hargaTotal = ProsesPemesanan.getTransaksi().getTotal()-10000;
         ProsesPemesanan.getTransaksi().setTotal(hargaTotal);
-        String SQL = "INSERT INTO pembayaran (nama,tanggal_pembayran, Jenis) VALUES("
+        String SQL = "INSERT INTO pembayaran (nama,no_identitas,tanggal_pembayran, Jenis) VALUES("
                     + "     '" + getNama() + "', "
-                    + "     '" + getDate() + "',"
-                    + "     ' Tunai ' )";
+                    + "     '" + getNo_id()+ "',"
+                    + "     NOW(),"
+                    + "     ' Card ' )";
             setId_pembayran(BDHelper.insertQueryGetId(SQL));
+    }
+
+    public Card() {
+    }
+
+    public Card(String nama, String no_id) {
+        super(nama, no_id);
     }
 }

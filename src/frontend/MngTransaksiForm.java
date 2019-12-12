@@ -5,6 +5,10 @@
  */
 package frontend;
 
+import backend.*;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rizki
@@ -16,6 +20,7 @@ public class MngTransaksiForm extends javax.swing.JFrame {
      */
     public MngTransaksiForm() {
         initComponents();
+        tampilkanData();
     }
 
     /**
@@ -29,13 +34,13 @@ public class MngTransaksiForm extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
+        selectStatus = new javax.swing.JComboBox<>();
+        btSimpan = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabel = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -45,14 +50,24 @@ public class MngTransaksiForm extends javax.swing.JFrame {
         jLabel2.setText("No. Transaksi");
 
         jButton1.setText("Cari");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Status");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Active", "Close" }));
 
-        jButton2.setText("Simpan");
+        btSimpan.setText("Simpan");
+        btSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btSimpanActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -63,7 +78,12 @@ public class MngTransaksiForm extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tabel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,11 +96,11 @@ public class MngTransaksiForm extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jButton2))
+                            .addComponent(btSimpan))
                         .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtId)
+                            .addComponent(selectStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -97,15 +117,15 @@ public class MngTransaksiForm extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1)
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btSimpan)
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -113,6 +133,29 @@ public class MngTransaksiForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
+        DefaultTableModel model = (DefaultTableModel)tabel.getModel();
+        int row =tabel.getSelectedRow();
+        
+        txtId.setText(model.getValueAt(row, 0).toString());
+        if ((model.getValueAt(row, 6)).equals("Active")) {
+            selectStatus.setSelectedIndex(0);
+        }else{
+            selectStatus.setSelectedIndex(1);
+        }
+    }//GEN-LAST:event_tabelMouseClicked
+
+    private void btSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSimpanActionPerformed
+        Transaksi transaksi = new Transaksi().getById(Integer.parseInt(txtId.getText()));
+        transaksi.setStatus(selectStatus.getSelectedIndex());
+        transaksi.save();
+        tampilkanData();
+    }//GEN-LAST:event_btSimpanActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cari(Integer.parseInt(txtId.getText()));
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,16 +194,62 @@ public class MngTransaksiForm extends javax.swing.JFrame {
             }
         });
     }
+    
+     public void tampilkanData() {
+        String[] kolom = {"id", "id_tamu", "id_pembayaran", "id_kamar", "lama Inap","Total Biaya","Status"};
+        ArrayList<Transaksi> list = new Transaksi().getAll();
+        Object rowData[] = new Object[7];
+
+        tabel.setModel(new DefaultTableModel(new Object[][]{}, kolom));
+
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getIdTansaksi();
+            rowData[1] = list.get(i).getTamu().getIdTamu();
+            rowData[2] = list.get(i).getBayar().getId_pembayran();
+            rowData[3] = list.get(i).getKamar().getIdkamar();
+            rowData[4] = list.get(i).getLamaInap() + " hari";
+            rowData[5] = list.get(i).getTotal();
+            if (list.get(i).getStatus()==1) {
+            rowData[6] = "close";
+            }else{
+            rowData[6] = "Active";    
+            }
+
+            ((DefaultTableModel) tabel.getModel()).addRow(rowData);
+        }
+    }
+     
+      public void cari(int id) {
+        String[] kolom = {"id", "id_tamu", "id_pembayaran", "id_kamar", "lama Inap","Total Biaya","Status"};
+        Transaksi list = new Transaksi().getById(id);
+        Object rowData[] = new Object[7];
+
+        tabel.setModel(new DefaultTableModel(new Object[][]{}, kolom));
+
+            rowData[0] = list.getIdTansaksi();
+            rowData[1] = list.getTamu().getIdTamu();
+            rowData[2] = list.getBayar().getId_pembayran();
+            rowData[3] = list.getKamar().getIdkamar();
+            rowData[4] = list.getLamaInap() + " hari";
+            rowData[5] = list.getTotal();
+            if (list.getStatus()==1) {
+            rowData[6] = "close";
+            }else{
+            rowData[6] = "Active";    
+            }
+
+            ((DefaultTableModel) tabel.getModel()).addRow(rowData);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btSimpan;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> selectStatus;
+    private javax.swing.JTable tabel;
+    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

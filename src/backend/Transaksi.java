@@ -9,11 +9,11 @@ import java.sql.*;
 public class Transaksi implements crud{
     private int idTansaksi;
     private Tamu tamu = new Tamu();
-    private Pembayaran bayar;
+    private Pembayaran bayar = new Pembayaran();
     private Kamar kamar = new KamarKosong();
     private int lamaInap;
     private int total;
-    private int status;
+    private int status=0;
 
     public int getIdTansaksi() {
         return idTansaksi;
@@ -87,12 +87,12 @@ public class Transaksi implements crud{
             while (rs.next()) {
                transaksi = new Transaksi();
                transaksi.setIdTansaksi(rs.getInt("id_transaksi"));
-               transaksi.setTamu(transaksi.tamu.getById(Integer.parseInt("id_tamu")));
-               transaksi.setKamar(transaksi.kamar.getById(Integer.parseInt("id_kamar")));
-               transaksi.setBayar(transaksi.bayar.getById(Integer.parseInt("id_pembayaran")));
+               transaksi.setTamu(transaksi.tamu.getById(Integer.valueOf(rs.getInt("id_tamu"))));
+               transaksi.setKamar(transaksi.kamar.getById(rs.getInt("id_kamar")));
+               transaksi.setBayar(transaksi.bayar.getById(rs.getInt("id_pembayaran")));
                transaksi.setLamaInap(rs.getInt("lama_inap"));
-               transaksi.setTotal(Integer.parseInt("total_biaya"));
-               transaksi.setStatus(Integer.parseInt("status"));
+               transaksi.setTotal(rs.getInt("total_biaya"));
+               transaksi.setStatus(rs.getInt("status"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,12 +107,12 @@ public class Transaksi implements crud{
             while (rs.next()) {     
                Transaksi transaksi = new Transaksi();
                transaksi.setIdTansaksi(rs.getInt("id_transaksi"));
-               transaksi.setTamu(transaksi.tamu.getById(Integer.parseInt("id_tamu")));
-               transaksi.setKamar(transaksi.kamar.getById(Integer.parseInt("id_kamar")));
-               transaksi.setBayar(transaksi.bayar.getById(Integer.parseInt("id_pembayaran")));
+               transaksi.setTamu(transaksi.tamu.getById(Integer.valueOf(rs.getInt("id_tamu"))));
+               transaksi.setKamar(transaksi.kamar.getById(rs.getInt("id_kamar")));
+               transaksi.setBayar(transaksi.bayar.getById(rs.getInt("id_pembayaran")));
                transaksi.setLamaInap(rs.getInt("lama_inap"));
-               transaksi.setTotal(Integer.parseInt("total_biaya"));
-               transaksi.setStatus(Integer.parseInt("status"));
+               transaksi.setTotal(rs.getInt("total_biaya"));
+               transaksi.setStatus(rs.getInt("status"));
                listTransaksi.add(transaksi);
             }
         } catch (Exception e) {
@@ -123,19 +123,28 @@ public class Transaksi implements crud{
      
     @Override
      public void save(){
-            String SQL = "UPDATE transaksi SET "
-                    +"      id_tamu = '"+this.tamu.getIdTamu()+ "', "
-                    +"      id_pembayaran = '"+this.bayar.getId_pembayran()+ "', "
-                    +"      id_kamar = '"+this.kamar.getIdkamar() + "', "
-                    +"      lama_inap = '"+this.lamaInap + "' "
-                    +"      status = '"+this.status + "' "
+        if (idTansaksi==0) {
+            String SQL = "INSERT INTO transaksi VALUES ("
+                    +"      Null, "
+                    +"      "+this.tamu.getIdTamu()+ ", "
+                    +"      "+this.bayar.getId_pembayran()+ ", "
+                    +"      "+this.kamar.getIdkamar() + ", "
+                    +"      "+this.lamaInap + " ,"
+                    +"      "+this.total + ","
+                    +"      "+this.status+")";
+            BDHelper.executeQuery(SQL);
+            
+        }else{
+                    String SQL = "UPDATE transaksi SET "
+                    +"      status = '"+this.status + "'"
                     +"      WHERE id_transaksi = '"+this.idTansaksi + "'";
             BDHelper.executeQuery(SQL);
+        }
     }
      
     @Override
      public void delete(){
-        String sql = "DELETE FROM tamu WHERE id_tamu ='"+this.idTansaksi+"'";
+        String sql = "DELETE FROM transaksi WHERE id_transaksi ='"+this.idTansaksi+"'";
         BDHelper.executeQuery(sql);
     }
 }
