@@ -1,23 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package frontend;
 
 import backend.*;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author rizki
- */
 public class TamuForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form addUser
-     */
     public TamuForm() {
         initComponents();
         kosngkanForm();
@@ -54,6 +42,16 @@ public class TamuForm extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btCAri = new javax.swing.JButton();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        btHome = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        btTamu = new javax.swing.JMenu();
+        menuTamu = new javax.swing.JMenuItem();
+        menuKamar = new javax.swing.JMenuItem();
+        menuTransaksi = new javax.swing.JMenuItem();
+        menuBayar = new javax.swing.JMenuItem();
 
         jButton1.setText("jButton1");
 
@@ -130,7 +128,7 @@ public class TamuForm extends javax.swing.JFrame {
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabel.setModel(new javax.swing.table.DefaultTableModel(
@@ -156,7 +154,7 @@ public class TamuForm extends javax.swing.JFrame {
         );
         jLayeredPane3Layout.setVerticalGroup(
             jLayeredPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jLabel2.setText("Name :");
@@ -239,6 +237,87 @@ public class TamuForm extends javax.swing.JFrame {
                     .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        btHome.setText("Home");
+        btHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btHomeMouseClicked(evt);
+            }
+        });
+
+        jMenuItem4.setText("Halaman Utama");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        btHome.add(jMenuItem4);
+
+        jMenuItem2.setText("Pemesanan");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        btHome.add(jMenuItem2);
+
+        jMenuItem3.setText("exit");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        btHome.add(jMenuItem3);
+
+        jMenuBar2.add(btHome);
+
+        btTamu.setText("Manajement");
+
+        menuTamu.setText("Tamu");
+        menuTamu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuTamuMouseClicked(evt);
+            }
+        });
+        menuTamu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTamuActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuTamu);
+
+        menuKamar.setText("Kamar");
+        menuKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuKamarMouseClicked(evt);
+            }
+        });
+        menuKamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuKamarActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuKamar);
+
+        menuTransaksi.setText("Transaksi");
+        menuTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTransaksiActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuTransaksi);
+
+        menuBayar.setText("Bayar");
+        menuBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBayarActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuBayar);
+
+        jMenuBar2.add(btTamu);
+
+        setJMenuBar(jMenuBar2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -270,7 +349,7 @@ public class TamuForm extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLayeredPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,15 +367,15 @@ public class TamuForm extends javax.swing.JFrame {
         kat.setTelp(txtTelp.getText());
         kat.save();
         txtId.setText(Integer.toString(kat.getIdTamu()));
-        
+
         kosngkanForm();
         tampilkanData();
     }//GEN-LAST:event_btSimpanActionPerformed
 
     private void btHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btHapusActionPerformed
-         DefaultTableModel model = (DefaultTableModel)tabel.getModel();
+        DefaultTableModel model = (DefaultTableModel) tabel.getModel();
         int row = tabel.getSelectedRow();
-        
+
         Tamu kat = new Tamu().getById(Integer.parseInt(model.getValueAt(row, 0).toString()));
         kat.delete();
         kosngkanForm();
@@ -312,9 +391,9 @@ public class TamuForm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtIdActionPerformed
 
     private void tabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelMouseClicked
-       DefaultTableModel model = (DefaultTableModel)tabel.getModel();
-        int row =tabel.getSelectedRow();
-        
+        DefaultTableModel model = (DefaultTableModel) tabel.getModel();
+        int row = tabel.getSelectedRow();
+
         txtId.setText(model.getValueAt(row, 0).toString());
         txtName.setText(model.getValueAt(row, 1).toString());
         txtAlamat.setText(model.getValueAt(row, 2).toString());
@@ -328,11 +407,68 @@ public class TamuForm extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         Tamu tamu = new Tamu().getById(Integer.parseInt(txtId.getText()));
         ProsesPemesanan.getTransaksi().setTamu(tamu);
-        
+
         PemesananForm pmsForm = new PemesananForm();
         this.setVisible(false);
         pmsForm.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Main mn = new Main();
+        mn.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        TamuForm t = new TamuForm();
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void btHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btHomeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btHomeMouseClicked
+
+    private void menuTamuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTamuMouseClicked
+
+    }//GEN-LAST:event_menuTamuMouseClicked
+
+    private void menuTamuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTamuActionPerformed
+        // TODO add your handling code here:
+        TamuForm t = new TamuForm();
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuTamuActionPerformed
+
+    private void menuKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuKamarMouseClicked
+
+    }//GEN-LAST:event_menuKamarMouseClicked
+
+    private void menuKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKamarActionPerformed
+        // TODO add your handling code here:
+        FrmKamar k = new FrmKamar();
+        k.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuKamarActionPerformed
+
+    private void menuTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTransaksiActionPerformed
+        // TODO add your handling code here:
+        MngTransaksiForm mt = new MngTransaksiForm();
+        mt.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuTransaksiActionPerformed
+
+    private void menuBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBayarActionPerformed
+        // TODO add your handling code here:
+        FormPembayaran p = new FormPembayaran();
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuBayarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -373,7 +509,9 @@ public class TamuForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCAri;
     private javax.swing.JButton btHapus;
+    private javax.swing.JMenu btHome;
     private javax.swing.JButton btSimpan;
+    private javax.swing.JMenu btTamu;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -385,9 +523,17 @@ public class TamuForm extends javax.swing.JFrame {
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
     private javax.swing.JLayeredPane jLayeredPane3;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JMenuItem menuBayar;
+    private javax.swing.JMenuItem menuKamar;
+    private javax.swing.JMenuItem menuTamu;
+    private javax.swing.JMenuItem menuTransaksi;
     private javax.swing.JTable tabel;
     private javax.swing.JTextField txtAlamat;
     private javax.swing.JTextField txtId;
@@ -395,42 +541,42 @@ public class TamuForm extends javax.swing.JFrame {
     private javax.swing.JTextField txtTelp;
     // End of variables declaration//GEN-END:variables
 
-    public void cari(String Keyword){
-        String[] kolom = {"ID","Nama", "Alamat","Telp"};
+    public void cari(String Keyword) {
+        String[] kolom = {"ID", "Nama", "Alamat", "Telp"};
         ArrayList<Tamu> list = new Tamu().search(Keyword);
         Object rowData[] = new Object[4];
-        
-        tabel.setModel(new DefaultTableModel(new Object[][] {}, kolom));
-        
+
+        tabel.setModel(new DefaultTableModel(new Object[][]{}, kolom));
+
         for (Tamu kat : list) {
             rowData[0] = kat.getIdTamu();
             rowData[1] = kat.getNamaTamu();
             rowData[2] = kat.getAlamat();
             rowData[3] = kat.getTelp();
-            ((DefaultTableModel)tabel.getModel()).addRow(rowData);
+            ((DefaultTableModel) tabel.getModel()).addRow(rowData);
         }
     }
-      
-       public void kosngkanForm(){
+
+    public void kosngkanForm() {
         txtId.setText("0");
         txtName.setText("");
         txtAlamat.setText("");
         txtTelp.setText("");
     }
-       
-        public void tampilkanData(){
-        String[] kolom = {"ID","Nama", "Alamat","Telp"};
+
+    public void tampilkanData() {
+        String[] kolom = {"ID", "Nama", "Alamat", "Telp"};
         ArrayList<Tamu> list = new Tamu().getAll();
         Object rowData[] = new Object[4];
-        
-        tabel.setModel(new DefaultTableModel(new Object[][] {}, kolom));
-        
+
+        tabel.setModel(new DefaultTableModel(new Object[][]{}, kolom));
+
         for (Tamu kat : list) {
             rowData[0] = kat.getIdTamu();
             rowData[1] = kat.getNamaTamu();
             rowData[2] = kat.getAlamat();
             rowData[3] = kat.getTelp();
-            ((DefaultTableModel)tabel.getModel()).addRow(rowData);
+            ((DefaultTableModel) tabel.getModel()).addRow(rowData);
         }
     }
 }

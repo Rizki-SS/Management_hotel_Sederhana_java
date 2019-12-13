@@ -62,6 +62,16 @@ public class FrmKamar extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        btHome = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        btTamu = new javax.swing.JMenu();
+        menuTamu = new javax.swing.JMenuItem();
+        menuKamar = new javax.swing.JMenuItem();
+        menuTransaksi = new javax.swing.JMenuItem();
+        menuBayar = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -207,6 +217,87 @@ public class FrmKamar extends javax.swing.JFrame {
                     .addComponent(jLabel6)))
         );
 
+        btHome.setText("Home");
+        btHome.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btHomeMouseClicked(evt);
+            }
+        });
+
+        jMenuItem4.setText("Halaman Utama");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        btHome.add(jMenuItem4);
+
+        jMenuItem2.setText("Pemesanan");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        btHome.add(jMenuItem2);
+
+        jMenuItem3.setText("exit");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        btHome.add(jMenuItem3);
+
+        jMenuBar2.add(btHome);
+
+        btTamu.setText("Manajement");
+
+        menuTamu.setText("Tamu");
+        menuTamu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuTamuMouseClicked(evt);
+            }
+        });
+        menuTamu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTamuActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuTamu);
+
+        menuKamar.setText("Kamar");
+        menuKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuKamarMouseClicked(evt);
+            }
+        });
+        menuKamar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuKamarActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuKamar);
+
+        menuTransaksi.setText("Transaksi");
+        menuTransaksi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuTransaksiActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuTransaksi);
+
+        menuBayar.setText("Bayar");
+        menuBayar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuBayarActionPerformed(evt);
+            }
+        });
+        btTamu.add(menuBayar);
+
+        jMenuBar2.add(btTamu);
+
+        setJMenuBar(jMenuBar2);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -228,7 +319,7 @@ public class FrmKamar extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,6 +381,63 @@ public class FrmKamar extends javax.swing.JFrame {
         txtFasilitas.setText(model.getValueAt(row, 4).toString());
     }//GEN-LAST:event_tblKamarMouseClicked
 
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        Main mn = new Main();
+        mn.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        TamuForm t = new TamuForm();
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void btHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btHomeMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btHomeMouseClicked
+
+    private void menuTamuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuTamuMouseClicked
+
+    }//GEN-LAST:event_menuTamuMouseClicked
+
+    private void menuTamuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTamuActionPerformed
+        // TODO add your handling code here:
+        TamuForm t = new TamuForm();
+        t.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuTamuActionPerformed
+
+    private void menuKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuKamarMouseClicked
+
+    }//GEN-LAST:event_menuKamarMouseClicked
+
+    private void menuKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuKamarActionPerformed
+        // TODO add your handling code here:
+        FrmKamar k = new FrmKamar();
+        k.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuKamarActionPerformed
+
+    private void menuTransaksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuTransaksiActionPerformed
+        // TODO add your handling code here:
+        MngTransaksiForm mt = new MngTransaksiForm();
+        mt.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuTransaksiActionPerformed
+
+    private void menuBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBayarActionPerformed
+        // TODO add your handling code here:
+        FormPembayaran p = new FormPembayaran();
+        p.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_menuBayarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,6 +480,8 @@ public class FrmKamar extends javax.swing.JFrame {
     private javax.swing.JButton BtnCari;
     private javax.swing.JButton BtnHps;
     private javax.swing.JButton BtnSimpan;
+    private javax.swing.JMenu btHome;
+    private javax.swing.JMenu btTamu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -340,7 +490,15 @@ public class FrmKamar extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JLayeredPane jLayeredPane2;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem menuBayar;
+    private javax.swing.JMenuItem menuKamar;
+    private javax.swing.JMenuItem menuTamu;
+    private javax.swing.JMenuItem menuTransaksi;
     private javax.swing.JTable tblKamar;
     private javax.swing.JTextField txtFasilitas;
     private javax.swing.JTextField txtHrgKmr;
