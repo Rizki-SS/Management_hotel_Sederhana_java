@@ -5,11 +5,14 @@
  */
 package backend;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author rizki
  */
 public interface crud {
+    public ArrayList getAll();
     public void save();
     public void delete();
 }

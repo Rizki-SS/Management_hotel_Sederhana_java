@@ -50,11 +50,14 @@ public class Tamu implements crud{
     public Tamu() {
     }
 
-    public Tamu(String namaTamu, String alamat) {
+    public Tamu(String namaTamu, String alamat, String telp) {
 //        this.idTamu = idTamu;
         this.namaTamu = namaTamu;
         this.alamat = alamat;
+        this.telp = telp;
     }
+
+   
     
     public Tamu getById(int id){
         Tamu tamu = new Tamu();
@@ -117,7 +120,7 @@ public class Tamu implements crud{
     
     public void save(){
         if (getById(idTamu).getIdTamu()==0) {
-            String sql = "INSERT INTO tamu(nama,alamat,telp) VALUE ('"+this.namaTamu+"',' "+this.alamat+"',' "+this.telp+"')";
+            String sql = "INSERT INTO tamu(nama,alamat,telp) VALUE ('"+this.namaTamu+"','"+this.alamat+"','"+this.telp+"')";
             this.idTamu = BDHelper.insertQueryGetId(sql);
         }else{
             String sql = "UPDATE tamu SET nama = '"+this.namaTamu+"', alamat = '"+this.alamat+"', telp = '"+this.telp+"' WHERE id_tamu = '"+this.idTamu+"'";
@@ -128,5 +131,29 @@ public class Tamu implements crud{
     public void delete(){
         String sql = "DELETE FROM tamu WHERE id_tamu ='"+this.idTamu+"'";
         BDHelper.executeQuery(sql);
+    }
+    
+    public ArrayList<Tamu> getByDetai(String namaTamu, String alamat, String telp){
+        ArrayList<Tamu> listAnggota = new ArrayList();
+          ResultSet rs;
+          
+        namaTamu = namaTamu.trim();
+        alamat = alamat.trim();
+        telp = telp.trim();
+        rs = BDHelper.selectQuery("SELECT * FROM tamu Where nama = '"+ namaTamu +"' and alamat = '"+alamat+"' and telp = '"+telp+"'");
+        
+        try {
+            while (rs.next()) {
+                Tamu kat = new Tamu();
+                kat.setIdTamu(rs.getInt("id_tamu"));
+                kat.setNamaTamu(rs.getString("nama"));
+                kat.setAlamat(rs.getString("alamat"));
+                kat.setTelp(rs.getString("telp"));
+                listAnggota.add(kat);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listAnggota;
     }
 }

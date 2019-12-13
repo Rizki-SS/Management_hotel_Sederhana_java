@@ -99,6 +99,29 @@ public class Pembayaran implements crud{
          String sql = "DELETE FROM pembayaran WHERE id_tamu ='"+this.id_pembayran+"'";
         BDHelper.executeQuery(sql);
     }
+
+    ArrayList<Pembayaran> getByDetai(String nama, String no_id) {
+        ArrayList<Pembayaran> listAnggota = new ArrayList();
+          ResultSet rs;
+          
+        nama = nama.trim();
+        no_id = no_id.trim();
+        rs = BDHelper.selectQuery("SELECT * FROM pembayaran Where nama = '"+ nama +"' and no_identitas = '"+no_id+"'");
+        
+        try {
+            while (rs.next()) {
+                Pembayaran kat = new Pembayaran();
+                kat.setId_pembayran(rs.getInt("id_pembayaran"));
+                kat.setNama(rs.getString("nama"));
+                kat.setNo_id(rs.getString("no_identitas"));
+                kat.setDate(rs.getString("tanggal_pembayran"));
+                listAnggota.add(kat);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return listAnggota;
+    }
     
     
 }
